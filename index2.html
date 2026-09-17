@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>麻雀部内対抗戦</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Googleスプレッドシート -->
+    <script>
+        window.SHEET_URL =
+            "https://docs.google.com/spreadsheets/d/e/2PACX-1vRfiRojMgjo5wINHLPCbrR8KYo2aSUrMRdGxTHTiYuaByo0TZ_nouROgCfBSZLvcQWjRjbQJup5nvk7/pub?output=csv";
+    </script>
+
+</head>
+
+
+<body>
+
+    <main class="container">
+
+
+        <!-- =========================================
+             タイトル
+        ========================================== -->
+
+        <header class="header">
+
+            <h1>
+                🀄 麻雀部内対抗戦
+            </h1>
+
+            <p class="description">
+                対局結果をGoogleスプレッドシートから読み込みます
+            </p>
+
+        </header>
+
+
+        <!-- =========================================
+             ランキングエリア
+        ========================================== -->
+
+        <section class="ranking-section">
+
+
+            <!-- =====================================
+                 大会ランキング
+            ====================================== -->
+
+            <div class="ranking-header">
+
+                <h2>
+                    🏆 大会ランキング
+                </h2>
+
+                <button
+                    type="button"
+                    id="refreshRankingButton"
+                    class="refresh-button"
+                >
+                    🔄 最新結果に更新
+                </button>
+
+            </div>
+
+
+            <!-- 読み込み状態 -->
+
+            <div
+                id="rankingStatus"
+                class="status"
+            >
+                データを読み込んでいます…
+            </div>
+
+
+            <!-- 最終更新 -->
+
+            <div
+                id="lastUpdated"
+                class="last-updated"
+            >
+            </div>
+
+
+            <!-- =====================================
+                 個人ランキング
+            ====================================== -->
+
+            <h3>
+                👤 個人ランキング
+            </h3>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                順位
+                            </th>
+
+                            <th>
+                                名前
+                            </th>
+
+                            <th>
+                                チーム
+                            </th>
+
+                            <th>
+                                合計
+                            </th>
+
+                            <th>
+                                試合
+                            </th>
+
+                            <th>
+                                平均
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="playerRanking">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="empty"
+                            >
+                                データを読み込んでいます…
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- =====================================
+                 チームランキング
+            ====================================== -->
+
+            <h3>
+                👥 チームランキング
+            </h3>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                順位
+                            </th>
+
+                            <th>
+                                チーム
+                            </th>
+
+                            <th>
+                                合計
+                            </th>
+
+                            <th>
+                                試合
+                            </th>
+
+                            <th>
+                                平均
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="teamRanking">
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="empty"
+                            >
+                                データを読み込んでいます…
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- =====================================
+                 対局結果
+            ====================================== -->
+
+            <h3>
+                📋 対局結果
+            </h3>
+
+            <div id="matchResults">
+
+                <div class="empty">
+                    データを読み込んでいます…
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             麻雀ポイント計算
+        ========================================== -->
+
+        <section class="calculator-section">
+
+
+            <h2>
+                🧮 麻雀ポイント計算
+            </h2>
+
+
+            <p class="calculator-description">
+                4人の点数を入力して<br>
+                順位と最終ポイントを自動計算します
+            </p>
+
+
+            <!-- =====================================
+                 入力
+            ====================================== -->
+
+            <div class="input-section">
+
+
+                <h3>
+                    対局結果
+                </h3>
+
+
+                <!-- 東 -->
+
+                <div class="player-row">
+
+                    <div class="seat">
+                        東
+                    </div>
+
+                    <input
+                        type="text"
+                        id="name1"
+                        placeholder="名前"
+                    >
+
+                    <input
+                        type="number"
+                        id="score1"
+                        placeholder="25000"
+                    >
+
+                    <button
+                        type="button"
+                        class="thousandButton"
+                        data-target="score1"
+                    >
+                        千
+                    </button>
+
+                </div>
+
+
+                <!-- 南 -->
+
+                <div class="player-row">
+
+                    <div class="seat">
+                        南
+                    </div>
+
+                    <input
+                        type="text"
+                        id="name2"
+                        placeholder="名前"
+                    >
+
+                    <input
+                        type="number"
+                        id="score2"
+                        placeholder="25000"
+                    >
+
+                    <button
+                        type="button"
+                        class="thousandButton"
+                        data-target="score2"
+                    >
+                        千
+                    </button>
+
+                </div>
+
+
+                <!-- 西 -->
+
+                <div class="player-row">
+
+                    <div class="seat">
+                        西
+                    </div>
+
+                    <input
+                        type="text"
+                        id="name3"
+                        placeholder="名前"
+                    >
+
+                    <input
+                        type="number"
+                        id="score3"
+                        placeholder="25000"
+                    >
+
+                    <button
+                        type="button"
+                        class="thousandButton"
+                        data-target="score3"
+                    >
+                        千
+                    </button>
+
+                </div>
+
+
+                <!-- 北 -->
+
+                <div class="player-row">
+
+                    <div class="seat">
+                        北
+                    </div>
+
+                    <input
+                        type="text"
+                        id="name4"
+                        placeholder="名前"
+                    >
+
+                    <input
+                        type="number"
+                        id="score4"
+                        placeholder="25000"
+                    >
+
+                    <button
+                        type="button"
+                        class="thousandButton"
+                        data-target="score4"
+                    >
+                        千
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =====================================
+                 チョンボ
+            ====================================== -->
+
+            <section class="chombo-section">
+
+                <button
+                    type="button"
+                    id="chomboButton"
+                    class="chombo-button"
+                >
+                    チョンボ
+                </button>
+
+                <p id="chomboStatus">
+                    通常対局：100,000点
+                </p>
+
+            </section>
+
+
+            <!-- =====================================
+                 計算・リセット
+            ====================================== -->
+
+            <div class="button-area">
+
+                <button
+                    type="button"
+                    id="calculateButton"
+                    class="calculate-button"
+                >
+                    計算する
+                </button>
+
+
+                <button
+                    type="button"
+                    id="resetButton"
+                    class="reset-button"
+                >
+                    リセット
+                </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 計算結果
+            ====================================== -->
+
+            <div id="result"></div>
+
+
+        </section>
+
+
+        <!-- =========================================
+             フッター
+        ========================================== -->
+
+        <footer>
+
+            <p>
+                福岡工業大学 競技麻雀部
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
