@@ -1,0 +1,385 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px 15px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP",
+        "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.site-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 36px;
+    margin: 0 0 10px;
+}
+
+.description {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 25px;
+}
+
+.card {
+    background: #fff;
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 22px;
+}
+
+h2 {
+    text-align: center;
+    margin: 0 0 22px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    text-align: left;
+}
+
+.refresh-button {
+    border: 0;
+    border-radius: 8px;
+    background: #333;
+    color: #fff;
+    padding: 11px 16px;
+    min-height: 44px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.refresh-button:hover,
+.calculate-button:hover,
+.reset-button:hover,
+.chombo-button:hover,
+.thousandButton:hover {
+    opacity: 0.82;
+}
+
+.status {
+    margin: 14px 0 4px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.status.error {
+    color: #b00020;
+    font-weight: bold;
+}
+
+.last-updated {
+    margin: 0 0 20px;
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+}
+
+.ranking-block {
+    margin-top: 24px;
+}
+
+.ranking-block h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 11px 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #eeeeee;
+    font-weight: bold;
+}
+
+.positive {
+    font-weight: bold;
+}
+
+.negative {
+    font-weight: bold;
+}
+
+.match-list {
+    display: grid;
+    gap: 10px;
+}
+
+.match-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.match-title {
+    background: #eeeeee;
+    padding: 10px 12px;
+    font-weight: bold;
+}
+
+.match-card table {
+    min-width: 0;
+}
+
+.match-card th,
+.match-card td {
+    border-top: 0;
+}
+
+.input-section {
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.input-section h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.player-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #333;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.player-row input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    min-width: 0;
+}
+
+.player-row input[type="text"] {
+    flex: 1;
+}
+
+.player-row input[type="number"] {
+    width: 130px;
+}
+
+.thousandButton {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.chombo-section {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.chombo-button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 6px;
+    background-color: #777;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#chomboStatus {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.button-area {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.calculate-button,
+.reset-button {
+    padding: 13px 30px;
+    border: none;
+    border-radius: 7px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.calculate-button {
+    background-color: #333;
+    color: white;
+}
+
+.reset-button {
+    background-color: #ccc;
+    color: #333;
+}
+
+#result {
+    margin-top: 35px;
+    text-align: center;
+}
+
+#result h2 {
+    margin-bottom: 15px;
+}
+
+#result table {
+    min-width: 0;
+}
+
+.note {
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+    padding-bottom: 20px;
+}
+
+.empty {
+    padding: 20px;
+    text-align: center;
+    color: #777;
+    background: #fafafa;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 18px 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .card {
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .section-heading h2 {
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .refresh-button {
+        width: 100%;
+    }
+
+    .ranking-block h3 {
+        font-size: 18px;
+    }
+
+    .player-row {
+        gap: 6px;
+    }
+
+    .seat {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+
+    .player-row input {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .player-row input[type="text"] {
+        width: 100px;
+    }
+
+    .player-row input[type="number"] {
+        width: 85px;
+    }
+
+    .thousandButton {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+    .button-area {
+        gap: 8px;
+    }
+
+    .calculate-button,
+    .reset-button {
+        padding: 11px 20px;
+        font-size: 15px;
+    }
+
+    table {
+        font-size: 13px;
+    }
+
+    th,
+    td {
+        padding: 9px 5px;
+    }
+}
